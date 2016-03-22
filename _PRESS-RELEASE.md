@@ -16,29 +16,29 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
  
-## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+## Polis ##
+  > Polis
 
-## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+## Direct Democracy ##
+  > Logical assistance for voters.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  > One stop shop for legislative information relating to your geographic location.
 
 ## Problem ##
-  > Describe the problem your product solves.
+  > Getting involved in the political process is difficult, especially for younger voters. Voting is at a historic low and often younger voters feel disenfranchised and feel like they have low political efficacy.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+  > We use data visualization of the voter turnout in a user's congressional district to incentivize that user to get involved in the political process. After incentivizing them, we provide tools and information to assist them in getting involved.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+  > Intuitive API for contacting your congressional representative.
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+  > Watch a video from our founder and then click the 'Getting Started' button. 
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+  > Before Polis I felt very disenfranchised. Now I can write my congressional leader while dropping the kids off at the pool!
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+  > Use app. Give us the money! Wrap it up and give pointers where the reader should go next. TODO
