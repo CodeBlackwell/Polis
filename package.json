@@ -6,7 +6,7 @@
   "scripts": {
     "test": "",
     "start": "node server",
-    "postinstall": "SET NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors",
+    "postinstall": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --colors",
     "eslint": "eslint ."
   },
   "dependencies": {
