@@ -19,20 +19,20 @@ app.use(express.static(publicPath));
 // put it in the "if" block below
 
 if (!isProduction) {
-  var bundle = require('./server/compiler.js')
-  bundle()
+  var bundle = require('./server/compiler.js');
+  bundle();
   app.all('/build/*', function (req, res) {
     proxy.web(req, res, {
-        target: 'http://localhost:8080'
-    })
-  })
-};
+      target: 'http://localhost:8080'
+    });
+  });
+}
 
 proxy.on('error', function(e) {
-  console.log('Could not connect to proxy, please try again...')
+  console.log('Could not connect to proxy, please try again...');
 });
 
 app.listen(port, function () {
-  console.log('Server running on port ' + port)
+  console.log('Server running on port ' + port);
 });
 
