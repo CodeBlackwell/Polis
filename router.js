@@ -17,6 +17,7 @@ var proxy = httpProxy.createProxyServer({
 });
 var isProduction = process.env.NODE_ENV === 'production';
 var port = isProduction ? process.env.PORT : 3500;
+var moment = require('moment')
 
 
 ///////////////////////////////////////// Models
@@ -138,7 +139,8 @@ module.exports = function(app) {
 
     });  
   });
-
+  
+  
   app.get('/api/zipcode/:lat/:long', function(req, res) {
     fetch('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + req.params.lat + ',' + req.params.long + ' &result_type=postal_code&key=' + config.GOOGLE_API_KEY)
       .then(response => response.json())
@@ -178,7 +180,7 @@ module.exports = function(app) {
 ///////////////////////////////////////////////////////////////// Queryable API
 
 
-
+  //Retrieve all Candidate Summaries
   app.get('/api/data/CandidateSummary', function(req, res, next) {
 
     var data = CandidateSummary.find({})
@@ -191,13 +193,13 @@ module.exports = function(app) {
     });
   });
 
-
+  //Retrieve a Candidate Summary based on zipcode and collectionYear
   app.get('/api/data/CandidateSummary/:zipcode/:collectionYear', function(req, res) {
 
       req.params.zipcode = validateNumber(req.params.zipcode);
       req.params.collectionYear = validateNumber(req.params.collectionYear);
       //@TODO: Update so 2016 is not hardcoded in
-      console.log('Number(req.params.collectionYear)', Number(req.params.collectionYear))
+      console.log('Number(req.params.collectionYear): ', Number(req.params.collectionYear))
       if(Number(req.params.collectionYear) <= 2016 &&
         Number(req.params.collectionYear) >= 2000 &&
         req.params.zipcode.length === 5
@@ -205,16 +207,18 @@ module.exports = function(app) {
 
       zipcode = req.params.zipcode;
 
+      //@TODO: Update
       Zipcode.find({ zipcode: zipcode }).exec(function(error, zipObject) {
         if (error) { console.log('error retrieving zipcode', error); }
 
-        var theYear = Date.parse('01/01/' + req.params.collectionYear);
+        // var theYear = Date.parse('01/01/' + req.params.collectionYear);
 
         if (zipObject.length > 1) {
           var storage = [];
           var iterations = zipObject.length;
           var i = 0;
           asyncLoop(iterations, function(loop) {
+            //@TODO: recode candidate summary Query to not use hardcoded Date.parse() value
             CandidateSummary.find({ year_of_collection: 1451635200000, can_off_sta: zipObject[i].state, can_off_dis: zipObject[i].district })
           .exec(function(err, docs) {
             if (err) {
@@ -233,7 +237,7 @@ module.exports = function(app) {
                 loop.next();
               }
             }
-          });
+          })
           }, function() { res.json(storage); });
         } else {
           if( zipObject[0] ){
