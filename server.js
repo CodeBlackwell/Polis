@@ -41,8 +41,8 @@ var output = './data/GeoJson/USCounties_500k.json';
 var Converter = require('csvtojson').Converter;
 var converter = new Converter({});
 
-var JSONdata = fs.readFileSync(output);
-JSONdata = JSON.parse(JSONdata.toString());
+// var JSONdata = fs.readFileSync(output);
+// JSONdata = JSON.parse(JSONdata.toString());
 
 /////////////////////////////////
 /////// Functions to help with the data processing

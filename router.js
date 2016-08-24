@@ -108,10 +108,10 @@ module.exports = function(app) {
   //route to return the representative for the district based on the zipcode lookup
   app.get('/api/representatives/:zipcode', function(req, res) {
     var zipcode = req.params.zipcode;
-    var storage;
+    var state;
     Zipcode.find({ zipcode: zipcode}).exec(function(err, doc){
-      var state = doc[0].state,
-          district = doc[0].district;
+          state = doc[0].state;
+          var district = doc[0].district;
       var url;
       if (doc[1]) {
         url = 'https://www.govtrack.us/api/v2/role?current=true&district=' + district + '&district=' + doc[1].district + '&state=' + state
@@ -124,7 +124,7 @@ module.exports = function(app) {
     }).then(function(val) {
       return val;
     }).then(function(congressperson) {
-      fetch('https://www.govtrack.us/api/v2/role?current=true&role_type=senator&state=CA')
+      fetch('https://www.govtrack.us/api/v2/role?current=true&role_type=senator&state=' + state)
           .then(function(img) {
             return img.json();
           })
