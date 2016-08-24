@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import { userRegister } from '../../actions/actionLogin'
 import RegisterForm from '../../components/RegisterForm/RegisterForm'
 import Zipcode from '../../components/Zipcode/Zipcode'
+import { getRepresentatives } from '../../actions/actionRepresentatives'
 
 export class Register extends Component {
    constructor(props) {
