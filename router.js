@@ -10,7 +10,6 @@ const jwt = require('jwt-simple');
 const congressBill = require('./db/upcomingCongressionalVotes.model');
 const senateBill = require('./db/UpcomingSenateBills.model');
 const config = require('./config');
-var CronJob = require('cron').CronJob;
 var httpProxy = require('http-proxy');
 var proxy = httpProxy.createProxyServer({
   changeOrigin: true
@@ -18,6 +17,7 @@ var proxy = httpProxy.createProxyServer({
 var isProduction = process.env.NODE_ENV === 'production';
 var port = isProduction ? process.env.PORT : 3500;
 var moment = require('moment')
+
 
 
 ///////////////////////////////////////// Models
@@ -49,60 +49,7 @@ module.exports = function(app) {
   app.listen(port, function () {
     console.log('Server running on port ' + port);
   });
-
-  app.get('/userOpinions', requireAuth, function(req, res) {
-    var decode = jwt.decode(req.headers.authorization, config.secret);
-    var id = decode.sub;
-
-    User.findOne({_id: id}, function(err, user) {
-      if (err) {
-        res.json(err)
-      }
-      res.send(user.bills)
-    })
-  })
-
-  app.post('/userOpinions', requireAuth, function(req, res) {
-    var billNumber = req.body.billNumber;
-    var opinion = req.body.opinion;
-    var votedAt = Date.parse(new Date());
-
-    var thisOpinion = new UserOpinion();
-    thisOpinion.billNumber = billNumber;
-    thisOpinion.decision = JSON.parse(opinion);
-    thisOpinion.votedAt = votedAt;
-
-    var decode = jwt.decode(req.headers.authorization, config.secret);
-    var id = decode.sub;
-    var notFound = true;
-    User.findOne({_id: id}, function(err, user) {
-      if (err) {
-        res.json(err);
-      } 
-      if (user.bills.length) {
-        user.bills.forEach((bill) => {
-          if (bill.billNumber === billNumber) {
-            bill.decision = JSON.parse(opinion)
-            notFound = false;
-          } 
-        })
-      } 
-      if (notFound){
-        user.bills.push(thisOpinion)
-      }
-      user.save(function(saveErr) {
-        if (err) {
-          res.json(saveErr)
-        }
-        console.log('this is the user at the end', user)
-        notFound = true;
-        res.json(thisOpinion)
-      })
-    })
-
-
-  });
-
+  
   app.post('/signin', requireSignin, Authentication.signin);
   app.post('/signup', Authentication.signup);
 
@@ -327,10 +274,3 @@ return loop;
 
 // cronjob runs every day at 9am Pacific Time
 
-new CronJob('00 00 09 * * *', () => {
-  // Collects bills to be debated before House and Senate and send them to the database
-  collectBills('https://www.govtrack.us/api/v2/bill?sort=-introduced_date&bill_type=house_bill', congressBill);
-  collectBills('https://www.govtrack.us/api/v2/bill?sort=-introduced_date&bill_type=senate_bill', senateBill);
-  // Add any other data collecting functions we want automated here
-
-}, true, 'America/Los_Angeles');
