@@ -181,28 +181,7 @@ export function updateLocalStorage() {
     if(json){
       localStorage.setItem('bills', JSON.stringify(json))
     } else {
-      localStorage.removeItem('bills')
+      localStorage.removeItem('bills') 
     }
   })
-}
-export function userVotes(bill, vote, user, testing) {
-  let url = '/userOpinions'
-  if (testing) {
-    url = 'https://localhost:3500/userOpinions'
-  }
-  return dispatch => {
-    return fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem('token')
-      },
-      body: JSON.stringify({
-        billNumber: bill._id,
-        opinion: vote
-      })
-    })
-      .then(response => response.json())
-      .then(json => dispatch(billVote(bill, json)))
-  }
 }

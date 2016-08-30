@@ -11,7 +11,7 @@ export class ContributorVisualization extends Component {
   }
 
   create() {
-    const chart  = c3.generate({
+    c3.generate({
       bindto: '#contribution_chart',
       data: {
         columns: [

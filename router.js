@@ -272,5 +272,4 @@ loop.next();
 return loop;
 }
 
-// cronjob runs every day at 9am Pacific Time
-
+// 
