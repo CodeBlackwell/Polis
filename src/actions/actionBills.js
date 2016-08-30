@@ -36,7 +36,7 @@ export function addBillType(bills, type, prop) {
       [type]: prop
     }))
   }
-  return localStorage.getItem('bills') !== 'undefined' ? addUserBills(newBills) : newBills
+  return localStorage.getItem('bills') ? addUserBills(newBills) : newBills
 }
 
 export function addUserBills(bills) {
@@ -146,7 +146,7 @@ export function getVotingHistory(rep) {
 export function receiveVotingHistory(payload) {
   return {
     type: REP_VOTING_HISTORY,
-    payload: localStorage.getItem('bills') === 'undefined' ? addUserBills(payload) : payload
+    payload: localStorage.getItem('bills') ? addUserBills(payload) : payload
   }
 }
 
@@ -178,8 +178,11 @@ export function updateLocalStorage() {
   })
   .then(response => response.json())
   .then(json => {
-    localStorage.setItem('bills', undefined)
-    localStorage.setItem('bills', JSON.stringify(json))
+    if(json){
+      localStorage.setItem('bills', JSON.stringify(json))
+    } else {
+      localStorage.removeItem('bills')
+    }
   })
 }
 export function userVotes(bill, vote, user, testing) {
