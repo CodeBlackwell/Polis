@@ -8,7 +8,7 @@ import Spinner from '../../components/Spinner/Spinner'
 import '../../components/RepresentativeView/RepView.scss';
 
 
-export default class Representatives extends Component {
+class Representatives extends Component {
   constructor(props) {
     super(props)
   }
