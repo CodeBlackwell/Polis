@@ -17,7 +17,8 @@ var proxy = httpProxy.createProxyServer({
 var isProduction = process.env.NODE_ENV === 'production';
 var port = isProduction ? process.env.PORT : 3500;
 var moment = require('moment')
-
+var asyncLoop = require('./csv_import').asyncLoop
+var validateNumber = require('./csv_import').validateNumber
 
 
 ///////////////////////////////////////// Models
@@ -29,16 +30,6 @@ var GE_Turnout = require('./db/Gen_Election_Voter_Turnout.model');
 var LDR_PAC_Sponsor = require('./db/LDR_PAC_Sponsor.model');
 var Administrative_Fine = require('./db/Administrative_Fine.model');
 var UserOpinion = require('./db/UserOpinion.model');
-
-/////////////////////////////////////////// API helper functions
-
-function validateNumber(aString) {
-  var results = aString.replace(/(\D)/g, '0');
-  console.log(results)
-  return results;
-};
-
-
 
 //////////////////////////////////////////
 
@@ -239,37 +230,5 @@ module.exports = function(app) {
 
 };
 
+// cronjob runs every day at 9am Pacific Time
 
-function asyncLoop(iterations, func, callback) {
-var index = 0;
-var done = false;
-var loop = {
-    next: function() {
-        if (done) {
-            return;
-        }
-
-        if (index < iterations) {
-            index++;
-            func(loop);
-
-        } else {
-            done = true;
-            callback();
-        }
-    },
-
-    iteration: function() {
-        return index - 1;
-    },
-
-    break: function() {
-        done = true;
-        callback();
-    }
-};
-loop.next();
-return loop;
-}
-
-// 
