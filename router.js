@@ -143,7 +143,9 @@ module.exports = function(app) {
         req.params.zipcode.length === 5
         ) {
 
-      zipcode = req.params.zipcode;
+      var zipcode = req.params.zipcode;
+      var year = req.params.collectionYear;
+
 
       //@TODO: Update
       Zipcode.find({ zipcode: zipcode }).exec(function(error, zipObject) {
@@ -157,7 +159,7 @@ module.exports = function(app) {
           var i = 0;
           asyncLoop(iterations, function(loop) {
             //@TODO: recode candidate summary Query to not use hardcoded Date.parse() value
-            CandidateSummary.find({ year_of_collection: 1451635200000, can_off_sta: zipObject[i].state, can_off_dis: zipObject[i].district })
+            CandidateSummary.find({ year_of_collection: year, can_off_sta: zipObject[i].state, can_off_dis: zipObject[i].district })
           .exec(function(err, docs) {
             if (err) {
               console.log(loop.iteration(), 'Candidate was skipped.', err);
@@ -179,7 +181,7 @@ module.exports = function(app) {
           }, function() { res.json(storage); });
         } else {
           if( zipObject[0] ){
-            CandidateSummary.find({ year_of_collection: 1451635200000, can_off_dis: zipObject[0].district, can_off_sta: zipObject[0].state})
+            CandidateSummary.find({ year_of_collection: year, can_off_dis: zipObject[0].district, can_off_sta: zipObject[0].state})
             .exec(function(err, documents) {
               if (err) { 
                 console.log('there was an error', err) 
@@ -188,44 +190,34 @@ module.exports = function(app) {
                 res.json(documents) 
               }
 
-            });
-            // CandidateSummary.find({ year_of_collection: 1451606400000 })
-            // .exec(function(err, documents) {
-            //   if (err) { 
-            //     console.log('there was an error', err) 
-            //   } else { 
-            //     console.log('these are the documents from the_year', documents)
-            //     res.json(documents) 
-            //   }
-
-            // });
+            })
           } else {
-            res.status(404).send('Invalid query');
+            res.status(404).send('Invalid query')
           }
         }
-      }); 
+      }) 
 
     } else {
-      res.status(404).send('Invalid Year or Zipcode Entered');
+      res.status(404).send('Invalid Year or Zipcode Entered')
     }
-  });
+  })
   //if we're not in production, this proxies requests to localhost:3000 and sends them to our webpack server at localhost:8080
   if (!isProduction) {
-    var bundle = require('./server/compiler.js');
-    bundle();
+    var bundle = require('./server/compiler.js')
+    bundle()
     app.all('/build/*', function (req, res) {
       proxy.web(req, res, {
         target: 'http://localhost:8080'
-      });
-    });
+      })
+    })
   }
 
   proxy.on('error', function(e) {
-    console.log('Could not connect to proxy, please try again...');
-  });
+    console.log('Could not connect to proxy, please try again...')
+  })
   //catch all other get requests, such as when refreshing
   app.get('*', function(req, res) {
-    res.sendFile(publicPath + '/index.html');
+    res.sendFile(publicPath + '/index.html')
   });
 
 };

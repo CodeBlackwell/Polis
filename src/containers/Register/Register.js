@@ -5,6 +5,7 @@ import { userRegister } from '../../actions/actionLogin'
 import RegisterForm from '../../components/RegisterForm/RegisterForm'
 import Zipcode from '../../components/Zipcode/Zipcode'
 import { getRepresentatives } from '../../actions/actionRepresentatives'
+import { getContributorData } from '../../actions/actionContributor'
 
 export class Register extends Component {
    constructor(props) {
@@ -19,6 +20,8 @@ export class Register extends Component {
 
    zipcodeSubmit(zipcode) {
       this.props.dispatch(getRepresentatives(zipcode))
+      this.props.dispatch(getContributorData(zipcode))
+
       browserHistory.push('representatives')
    }
 

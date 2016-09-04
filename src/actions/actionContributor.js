@@ -5,7 +5,7 @@ export const SET_GRAPH_TYPE = 'SET_GRAPH_TYPE'
 
 function processCandidate(candidateData) {
   const data = []
-  //console.log('data from processCandidate', candidateData)
+  console.log('Line 8: data from processCandidate ', candidateData)
   //[{ can_nam: 'etc'}, {can_nam: 'etc2'}]
   var ind_uni_con = ['individual < $200', candidateData[0].ind_uni_con],
       ind_ite_con = ['individual > $200', candidateData[0].ind_ite_con],
@@ -21,16 +21,16 @@ function processCandidate(candidateData) {
 export function getContributorData(zipcode) {
   return dispatch => {
     return fetch('/api/data/CandidateSummary/' + zipcode + '/2016')
-      .then(response => response.json())
+      // .then(response => response.json())
       .then(json => {
-        //console.log('this is in getContributorData', json)
+        console.log('Line 26: this is in getContributorData ', json)
         dispatch(receiveContributorData(processCandidate(json)))
       })
   }
 }
 
 export function receiveContributorData(data) {
-  //console.log('this is in receiveContributorData', data)
+  console.log('Line 33: this is in receiveContributorData ', data)
 	return {
 		type: GET_CONTRIBUTOR_DATA,
 		data

@@ -50,11 +50,11 @@ export class ContributorVisualization extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapReduxStateToComponentProps(state) {
   const contributions = state.ContributorVisualization.contributions
   return {
     contributions
   }
 }
 
-export default connect(mapStateToProps)(ContributorVisualization)
+export default connect(mapReduxStateToComponentProps)(ContributorVisualization)
