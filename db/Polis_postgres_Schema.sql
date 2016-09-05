@@ -64,23 +64,22 @@ CREATE TABLE "Contributions" (
 	"spe_nam" TEXT,
 	"ele_typ" TEXT,
 	"can_off_sta" TEXT,
-	"can_off_dis" BIGINT,
+	"can_off_dis" VARCHAR,
 	"can_off" TEXT,
 	"can_par_aff" TEXT,
 	"exp_amo" MONEY,
-	"exp_dat" DATE,
+	"exp_dat" Text,
 	"agg_amo" MONEY,
 	"sup_opp" TEXT,
-	" pur" TEXT,
+	"pur" TEXT,
 	"pay" TEXT,
 	"file_num" BIGINT,
 	"amn_ind" TEXT,
 	"tra_id" TEXT,
 	"ima_num" BIGINT,
-	"rec_dat" DATE,
-	"prev_file_num" BIGINT,
-	"dissem_dt" DATE,
-	CONSTRAINT Contributions_pk PRIMARY KEY ("tra_id")
+	"rec_dat" TEXT,
+	"prev_file_num" TEXT,
+	"dissem_dt" TEXT
 ) WITH (
   OIDS=FALSE
 );
