@@ -6,3 +6,4 @@ DROP TABLE IF EXISTS "Districts";
 
 DROP TABLE IF EXISTS "LDR_PAC_Sponsor";
 
+DROP TABLE IF EXISTS "Legislators";

@@ -6,11 +6,11 @@ module.exports = {
 
   converter: converter,
 
-  asyncLoop: function(iterations, func, callback){
+  asyncLoop(iterations, func, callback){
     var index = 0
     var done = false
     var loop = {
-      next: function() {
+      next() {
         if (done) {
           return
         }
@@ -25,11 +25,11 @@ module.exports = {
         }
       },
 
-      iteration: function() {
+      iteration() {
         return index - 1
       },
 
-      break: function() {
+      break() {
         done = true
         callback()
       }
@@ -38,7 +38,7 @@ module.exports = {
     return loop
   },
 
-  validateNumber: function(aString) {
+  validateNumber(aString) {
     var results = aString.replace(/(\D)/g, '0')
     return results
   },
@@ -46,7 +46,7 @@ module.exports = {
 // /*
 // * Converts integer strings containing ',' and '$' into integers.
 // **/
-  mixedDataCleaner: function(arrayOfObjects) {
+  mixedDataCleaner(arrayOfObjects) {
     const parseCurrency = (aString) => {
       var convert = aString.replace(/\$/g, '')
       convert = convert.replace(/\,/g, '')
@@ -75,7 +75,7 @@ module.exports = {
     return arrayOfObjects
   },
   //Generate Layered Data. This is specifically used with Stacked Bar Graph
-  generateLayers: function(arrayOfArrays) {
+  generateLayers(arrayOfArrays) {
     var layers = []
     for(var i = 0; i < arrayOfArrays.length; i++) {
       var candidate = []
@@ -90,38 +90,38 @@ module.exports = {
 * Parses Object data for integers. Removes ',' or '%' then uses
 * the JSON.parse() to parse the integers. 
 **/
-  numericDataCleaner: function(arrayOfObjects) {
+  numericDataCleaner(arrayOfObjects) {
 
     function parseNumbers(numberString) {
-      var myKicksGameIs = JSON.stringify(numberString),
-          justRude = myKicksGameIs.replace(/\,/g, ''),
-          dontGet = JSON.parse(justRude),
-          jiujitsued = JSON.parse(dontGet)
-          return jiujitsued
+      numberString = JSON.stringify(numberString),
+      numberString = numberString.replace(/\,/g, ''),
+      numberString = JSON.parse(numberString),
+      numberString = JSON.parse(numberString)
+      return numberString
     }
     function parsePercentage(numberString){
-      var soySauce = JSON.stringify(numberString),
-          wasabi = soySauce.replace(/\%/g, ''),
-          seaweed = JSON.parse(wasabi),
-          sushi = JSON.parse(seaweed)
-          return sushi
+      numberString = JSON.stringify(numberString),
+      numberString = numberString.replace(/\%/g, ''),
+      numberString = JSON.parse(numberString),
+      numberString = JSON.parse(numberString)
+      return numberString
     }
 
     for(var i = 0; i < arrayOfObjects.length; i++){
       for(var q in arrayOfObjects[i]) {
-        var currentJSON = arrayOfObjects[i];
+        var currentJSON = arrayOfObjects[i]
 
           //remove all '%'
         if(currentJSON[q][currentJSON[q].length - 1] === '%'){
-          currentJSON[q] = parsePercentage(currentJSON[q]);
+          currentJSON[q] = parsePercentage(currentJSON[q])
         }
           //remove all ',' 
         else if (!isNaN(Number(currentJSON[q][currentJSON[q].length - 1]))) {
-          currentJSON[q] = parseNumbers(currentJSON[q]);
+          currentJSON[q] = parseNumbers(currentJSON[q])
         }
       }
     }
-    return arrayOfObjects;
+    return arrayOfObjects
   },
   collectBills: function (uri, model) {
     fetch(uri, function(req, res) {

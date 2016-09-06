@@ -1,6 +1,6 @@
 {
   "engines": {
-    "node": "4.4.0"
+    "node": "6.5.0"
   },
   "main": "server.js",
   "scripts": {
@@ -54,6 +54,8 @@
     "passport": "0.3.2",
     "passport-jwt": "2.0.0",
     "passport-local": "1.0.0",
+    "pg": "6.1.0",
+    "pg-hstore": "2.3.2",
     "postcss-loader": "^0.9.1",
     "react": "^0.14.7",
     "react-bootstrap": "^0.28.4",
@@ -67,6 +69,7 @@
     "redux-thunk": "^2.0.1",
     "sass": "^0.5.0",
     "sass-loader": "^3.2.0",
+    "sequelize": "3.24.1",
     "style-loader": "^0.13.1",
     "url-loader": "^0.5.7",
     "webpack": "^1.9.11",

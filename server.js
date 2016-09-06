@@ -10,6 +10,7 @@ var router = require('./router')
 var publicPath = path.resolve(__dirname, 'public')
 var CronJob = require('cron').CronJob
 var asyncLoop = require('./csv_import').asyncLoop
+var collectBills = require('./csv_import').collectBills
 
 
 var config = require('./config')
@@ -21,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(publicPath))
 
 router(app)
+
 //connect to heroku
 var db = config.dbURI2
 
