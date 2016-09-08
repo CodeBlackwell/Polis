@@ -1,11 +1,10 @@
-var Converter = require('csvtojson').Converter
-var converter = new Converter({})
+var Decimal = require('decimal.js')
 
+function isCurrency(value) {
+  return typeof value === 'string' && (value.startsWith('$') || value.startsWith('-$'))
+}
 
 module.exports = {
-
-  converter: converter,
-
   asyncLoop(iterations, func, callback){
     var index = 0
     var done = false
@@ -46,32 +45,33 @@ module.exports = {
 // /*
 // * Converts integer strings containing ',' and '$' into integers.
 // **/
+
+
   mixedDataCleaner(arrayOfObjects) {
     const parseCurrency = (aString) => {
       var convert = aString.replace(/\$/g, '')
       convert = convert.replace(/\,/g, '')
-      convert = Number(convert)
-      return convert
+      convert = new Decimal(convert).times(100)
+      return convert.toNumber()
     }
   
+    arrayOfObjects.forEach(function(record) {
 
-    for(var i = 0; i < arrayOfObjects.length; i++) {
-    //For an Array containing arrays
-      if(Array.isArray(arrayOfObjects[i])) {
-        for(var q = 0; q < arrayOfObjects[i].length; q++){
-          if(arrayOfObjects[i][q]){
-            arrayOfObjects[i][q] = parseCurrency(arrayOfObjects[i][q])       
-          }
-        }      
+      if(Array.isArray(record)) {
+        record.forEach(function(value, index){
+          if(!isCurrency(value)) { return }
+          record[index] = parseCurrency(value)
+        })
       } else {
     //For an Array containing Objects (JSON)
-        for(var j in arrayOfObjects[i]){
-          if( arrayOfObjects[i][j][0] === '$' || arrayOfObjects[i][j][0] === '-' ) {
-            arrayOfObjects[i][j] = parseCurrency(arrayOfObjects[i][j])
-          }
+        for(var key in record){
+          var value = record[key]
+          if(!isCurrency(value)) { continue; }
+            record[key] = parseCurrency(value)
+          
         }
       }
-    }
+    })
     return arrayOfObjects
   },
   //Generate Layered Data. This is specifically used with Stacked Bar Graph
