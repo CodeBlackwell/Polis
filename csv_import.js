@@ -66,7 +66,7 @@ module.exports = {
     //For an Array containing Objects (JSON)
         for(var key in record){
           var value = record[key]
-          if(!isCurrency(value)) { continue; }
+          if(!isCurrency(value)) { continue }
             record[key] = parseCurrency(value)
           
         }
