@@ -1,12 +1,13 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('legislator', {
-    last_name: { type: DataTypes.STRING, unique: 'legislatorIndex' },
-    first_name: { type: DataTypes.STRING, unique: 'legislatorIndex' },
-    birthday: { type: DataTypes.STRING, unique: 'legislatorIndex' },
-    gender: { type: DataTypes.STRING, unique: 'legislatorIndex' },
-    type: { type: DataTypes.STRING, unique: 'legislatorIndex' },
-    state: DataTypes.STRING,
-    district: DataTypes.STRING,
+    fec_candidate_id: { type: DataTypes.STRING, unique: true },
+    last_name: { type: DataTypes.STRING, allowNull: false },
+    first_name: { type: DataTypes.STRING, allowNull: false },
+    birthday: DataTypes.STRING,
+    gender: DataTypes.STRING,
+    type: DataTypes.STRING,
+    state: { type: DataTypes.STRING, allowNull: false },
+    district: { type: DataTypes.INTEGER, allowNull: false },
     party: DataTypes.STRING,
     url: DataTypes.STRING,
     address: DataTypes.STRING,
@@ -14,7 +15,14 @@ module.exports = function(sequelize, DataTypes) {
     contact_form: DataTypes.STRING,
     twitter: DataTypes.STRING,
     facebook: DataTypes.STRING,
-    govtrack_id: DataTypes.STRING
+    govtrack_id: { type: DataTypes.STRING, allowNull: false, unique: true }
+  }, {
+    indexes: [
+      { unique: true, fields: ['state', 'last_name', 'first_name', 'district'] },
+      { fields: ['fec_candidate_id'] },
+      { fields: ['govtrack_id'] }
+    ],
+    underscored: true
   })
 
   
