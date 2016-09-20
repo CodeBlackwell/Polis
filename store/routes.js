@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import App from '../src/components/App/App';
+import App from '../src/components/App/App.js';
 import FrontPage from '../src/containers/FrontPage/FrontPage'
 import Representatives from '../src/containers/Representatives/Representatives'
 import RepresentativeInfo from '../src/containers/Representatives/RepresentativeInfo'
