@@ -1,8 +1,9 @@
+"use strict"
+
 var webpack = require('webpack');
 var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var nodeModulesPath = path.resolve(__dirname, 'node_modules');
 var buildPath = path.resolve(__dirname, 'public', 'build');
 
 var config = {
@@ -10,7 +11,7 @@ var config = {
   sassLoaders: [
     'css-loader',
     'postcss-loader',
-    'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve(__dirname, 'public', 'build');
+    'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve(__dirname, 'public', 'build')
   ],
   // We change to normal source mapping
   devtool: 'source-map',
@@ -48,11 +49,11 @@ var config = {
   },
 
   resolve: {
-      extensions: ['', '.js', '.jsx', '.css', '.scss', '.json'],
-      modulesDirectories: [
-        'node_modules'
-      ]        
+    extensions: ['', '.js', '.jsx', '.css', '.scss', '.json'],
+    modulesDirectories: [
+      'node_modules'
+    ]        
   },
-};
+}
 
-module.exports = config;
+module.exports = config
