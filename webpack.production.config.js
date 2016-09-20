@@ -6,10 +6,10 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var buildPath = path.resolve(__dirname, 'public', 'build');
 var sassLoaders = [
-    'css-loader',
-    'postcss-loader',
-    'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve(__dirname, 'public', 'build')
-  ]
+  'sass-loader?indent edSyntax=sass&includePaths[]=' + path.resolve(__dirname, 'public', 'build'),
+  'postcss-loader',
+  'css-loader'
+]
 
 var config = {
 
@@ -39,7 +39,7 @@ var config = {
         exclude: '/node_modules'
       },
       //This converts our .css into JS
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style-loader', sassLoaders.join('!')) },
+      { test: /\.scss$/, loaders: ['style', 'css', 'sass'] },
       { test : /\.json$/, loader: 'json-loader'},
       { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
       { test: /\.(woff|woff2)$/, loader:'url?prefix=font/&limit=5000' },
