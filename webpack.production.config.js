@@ -5,14 +5,15 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var buildPath = path.resolve(__dirname, 'public', 'build');
-
-var config = {
-
-  sassLoaders: [
+var sassLoaders = [
     'css-loader',
     'postcss-loader',
     'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve(__dirname, 'public', 'build')
-  ],
+  ]
+
+var config = {
+
+  sassLoaders: sassLoaders,
   // We change to normal source mapping
   devtool: 'source-map',
   entry: './index.js',
