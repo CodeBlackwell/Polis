@@ -11,7 +11,7 @@ import { loginSuccess } from '../../actions/actionLogin'
 
 import './App.scss';
 
-export default class App extends Component {
+class App extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props

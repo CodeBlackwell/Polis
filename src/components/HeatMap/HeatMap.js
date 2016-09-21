@@ -68,7 +68,7 @@ var counties = {
   6115: 26.58
 }
 
-export default class HeatMap extends Component {
+class HeatMap extends Component {
 
   // componentWillUpdate() {
   //   console.log('ay papi')

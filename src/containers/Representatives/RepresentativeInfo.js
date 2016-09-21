@@ -7,7 +7,7 @@ import { getCurrentPosition, getRepresentatives } from '../../actions/actionRepr
 
 import '../../components/RepresentativeView/RepView.scss';
 
-export default class RepresentativeInfo extends Component {
+class RepresentativeInfo extends Component {
 
 	render() {
 		const { params, representatives, children } = this.props
@@ -37,7 +37,6 @@ export default class RepresentativeInfo extends Component {
 	}
 }
 
-export default RepresentativeInfo
 
 function mapStateToProps(state) {
   const representatives = state.Representatives.representatives

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { yes, no, billVote, userVotes, loginCheck } from '../../actions/actionBills'
 import BillVotes from './BillVotes'
 
-export default class VotingHistoryList extends Component {
+class VotingHistoryList extends Component {
 
   constructor(props) {
     super(props)

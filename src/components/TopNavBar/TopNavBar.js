@@ -4,7 +4,7 @@ import './TopNavBar.scss'
 import { Link } from 'react-router'
 import { processLogout } from '../../actions/actionLogin'
 
-export default class TopNavbar extends Component {
+class TopNavbar extends Component {
 
   logout(e) {
     e.preventDefault()
