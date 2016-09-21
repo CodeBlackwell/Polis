@@ -9,7 +9,7 @@ import configureMockStore           from 'redux-mock-store'
 import thunk                        from 'redux-thunk'
 import {expect}                     from 'chai'
 import { INCREASE_PROGRESS }        from '../src/actions/actionRepresentatives'
-import Spinner                      from '../src/components/Spinner'
+import Spinner                      from '../src/components/Spinner/Spinner'
 import updateSpinnerProgress        from '../src/reducers/reducerSpinner'
 //import Profile from '../src/containers/Profile'
 

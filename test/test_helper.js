@@ -7,6 +7,7 @@ const win = doc.defaultView;
 
 global.document = doc;
 global.window = win;
+window.localStorage = require('./support/mockLocalStorage')
 
 // from mocha-jsdom https://github.com/rstacruz/mocha-jsdom/blob/master/index.js#L80
 Object.keys(window).forEach((key) => {

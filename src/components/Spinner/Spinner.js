@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProgressLabel from 'react-progress-label';
 
-import './Spinner.scss';
+// import './Spinner.scss';
 
 
 export default class Spinner extends Component {
