@@ -1,11 +1,11 @@
 const login = (state = {}, action) => {
   switch (action.type) {
-    case 'LOGIN':
-      return {
+  case 'LOGIN':
+    return {
         id: action.id,
       }
-    default:
-      return state
+  default:
+    return state
   }
 }
 

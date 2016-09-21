@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import './Bills.scss';
+import './Bills.scss'
 
 const Bill = ({ bill }) => (
   <div>

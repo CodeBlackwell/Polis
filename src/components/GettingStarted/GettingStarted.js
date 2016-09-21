@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
-import './GettingStarted.scss';
+import './GettingStarted.scss'
 
 export default class GettingStarted extends Component {
   render() {
@@ -13,11 +13,11 @@ export default class GettingStarted extends Component {
             <br />
         </div>
         <div className="col-md-3 col-md-offset-1">
-          <img className="tutorial_pic" src="http://2.bp.blogspot.com/--_UGll27enA/TjZD_rjkE4I/AAAAAAAAAEE/O9BZlieWD3c/s640/GIF-TUTORIAL-1.gif"  />
+          <img className="tutorial_pic" src="http://2.bp.blogspot.com/--_UGll27enA/TjZD_rjkE4I/AAAAAAAAAEE/O9BZlieWD3c/s640/GIF-TUTORIAL-1.gif" />
         </div>
           <Link to={'representatives'}><button className="btn btn-default getting_started_large">Get Started</button></Link>
       </div>
-    );
+    )
   }
 }
 

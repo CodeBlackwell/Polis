@@ -26,7 +26,7 @@ export function getRepresentatives (zipcode, testing) {
   }
   return dispatch => {
     dispatch(changeFetching())
-  	return fetch(url + zipcode)
+  	  return fetch(url + zipcode)
   		.then(response => response.json())
   		.then(json => dispatch(receiveRepresentatives(json)))
   } 

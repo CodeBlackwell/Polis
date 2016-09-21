@@ -1,8 +1,8 @@
-import nock                         from 'nock'
-import configureMockStore           from 'redux-mock-store'
-import thunk                        from 'redux-thunk'
-import { expect }                   from 'chai'
-import deepFreeze                   from 'deep-freeze'
+import nock from 'nock'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import { expect } from 'chai'
+import deepFreeze from 'deep-freeze'
 
 import { BILL_VOTE,
          BILL_DATA,
@@ -14,8 +14,8 @@ import { BILL_VOTE,
          userVotes,
          getVotingHistory,
          getSenateBillData,
-         getHouseBillData  }        from '../src/actions/actionBills'
-import bills                        from '../src/reducers/reducerBills'
+         getHouseBillData } from '../src/actions/actionBills'
+import bills from '../src/reducers/reducerBills'
 
 const middlewares = [ thunk ]
 const mockStore = configureMockStore(middlewares)

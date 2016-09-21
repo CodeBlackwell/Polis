@@ -2,26 +2,26 @@ import { RECEIVE_REPRESENTATIVES, IS_FETCHING } from '../actions/actionRepresent
 import { ADD_TO_BILLS } from '../actions/actionBills'
 
 export default function representativesList(state = {
-	representatives: [],
+	  representatives: [],
   isFetching: false,
   billsToShow: 9
 }, action) {
   switch (action.type) {
-    case IS_FETCHING: 
-      return Object.assign({}, state, {
+  case IS_FETCHING: 
+    return Object.assign({}, state, {
         isFetching: true
       })
-    case RECEIVE_REPRESENTATIVES:
-      return Object.assign({}, state, {
+  case RECEIVE_REPRESENTATIVES:
+    return Object.assign({}, state, {
         representatives: action.payload,
         isFetching: false,
       })
-    case ADD_TO_BILLS:
-      return Object.assign({}, state, {
+  case ADD_TO_BILLS:
+    return Object.assign({}, state, {
         billsToShow: state.billsToShow += 10
       })
-    default:
-      return state
+  default:
+    return state
   }
 }
 

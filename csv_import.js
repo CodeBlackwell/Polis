@@ -67,7 +67,7 @@ module.exports = {
         for(var key in record){
           var value = record[key]
           if(!isCurrency(value)) { continue }
-            record[key] = parseCurrency(value)
+          record[key] = parseCurrency(value)
           
         }
       }

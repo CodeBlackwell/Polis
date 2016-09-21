@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import './Zipcode.scss';
+import './Zipcode.scss'
 
 export default class Zipcode extends Component {
   handleSubmit(e) {
-      e.preventDefault()
-      this.props.zipcodeSubmit(this.zipcode.value)
-   }
+    e.preventDefault()
+    this.props.zipcodeSubmit(this.zipcode.value)
+  }
 
   render() {
     return <div className="zipcode-container">

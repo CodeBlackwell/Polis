@@ -1,12 +1,12 @@
-export const GET_ROLE_BILLS     = 'GET_ROLE_BILLS'
-export const ADD_TO_BILLS       = 'ADD_TO_BILLS'
-export const YES_VOTE           = 'YES_VOTE'
-export const NO_VOTE            = 'NO_VOTE'
-export const BILL_VOTE          = 'BILL_VOTE'
+export const GET_ROLE_BILLS = 'GET_ROLE_BILLS'
+export const ADD_TO_BILLS = 'ADD_TO_BILLS'
+export const YES_VOTE = 'YES_VOTE'
+export const NO_VOTE = 'NO_VOTE'
+export const BILL_VOTE = 'BILL_VOTE'
 export const REP_VOTING_HISTORY = 'REP_VOTING_HISTORY'
-export const BILL_DATA          = 'BILL_DATA'
-export const SET_REP_ROLE       = 'SET_REP_ROLE'
-export const LOGIN_CHECK        = 'LOGIN_CHECK'
+export const BILL_DATA = 'BILL_DATA'
+export const SET_REP_ROLE = 'SET_REP_ROLE'
+export const LOGIN_CHECK = 'LOGIN_CHECK'
 
 
 export function getRoleBills(role) {

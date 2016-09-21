@@ -8,26 +8,26 @@ import { getRepresentatives } from '../../actions/actionRepresentatives'
 import { getContributorData } from '../../actions/actionContributor'
 
 export class Register extends Component {
-   constructor(props) {
-      super(props)
-      this.onSubmit = this.onSubmit.bind(this)
-      this.zipcodeSubmit = this.zipcodeSubmit.bind(this)
+  constructor(props) {
+     super(props)
+     this.onSubmit = this.onSubmit.bind(this)
+     this.zipcodeSubmit = this.zipcodeSubmit.bind(this)
    }
 
-   onSubmit(login, password) {
-      this.props.dispatch(userRegister(login, password))
+  onSubmit(login, password) {
+     this.props.dispatch(userRegister(login, password))
    }
 
-   zipcodeSubmit(zipcode) {
-      this.props.dispatch(getRepresentatives(zipcode))
-      this.props.dispatch(getContributorData(zipcode))
+  zipcodeSubmit(zipcode) {
+     this.props.dispatch(getRepresentatives(zipcode))
+     this.props.dispatch(getContributorData(zipcode))
 
-      browserHistory.push('representatives')
+     browserHistory.push('representatives')
    }
 
-   render () {
-      const { registrationError } = this.props
-      return <div className='register-container'>
+  render () {
+     const { registrationError } = this.props
+     return <div className='register-container'>
             <Zipcode zipcodeSubmit={this.zipcodeSubmit} />
             <RegisterForm onSubmit={this.onSubmit} />
             { registrationError ? <div className='registration-error'>Sorry, that email is already taken.</div> : null}
@@ -36,9 +36,9 @@ export class Register extends Component {
 }
 
 function mapStateToProps(state) {
-   const registrationError = state.user.registrationError
-   return {
-      registrationError
+  const registrationError = state.user.registrationError
+  return {
+     registrationError
    }
 }
 

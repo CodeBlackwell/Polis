@@ -1,35 +1,35 @@
 
-const Authentication = require('./db/controllers/authentication');
-const passportService = require('./services/passport');
-const passport = require('passport');
-var path = require('path');
-var publicPath = path.resolve(__dirname, 'public');
-const requireAuth = passport.authenticate('jwt', { session: false });
-const requireSignin = passport.authenticate('local', { session: false });
-const jwt = require('jwt-simple');
-const congressBill = require('./db/upcomingCongressionalVotes.model');
-const senateBill = require('./db/UpcomingSenateBills.model');
-const config = require('./config');
-var httpProxy = require('http-proxy');
+const Authentication = require('./db/controllers/authentication')
+const passportService = require('./services/passport')
+const passport = require('passport')
+var path = require('path')
+var publicPath = path.resolve(__dirname, 'public')
+const requireAuth = passport.authenticate('jwt', { session: false })
+const requireSignin = passport.authenticate('local', { session: false })
+const jwt = require('jwt-simple')
+const congressBill = require('./db/upcomingCongressionalVotes.model')
+const senateBill = require('./db/UpcomingSenateBills.model')
+const config = require('./config')
+var httpProxy = require('http-proxy')
 var proxy = httpProxy.createProxyServer({
   changeOrigin: true
-});
-var isProduction = process.env.NODE_ENV === 'production';
-var port = isProduction ? process.env.PORT : 3500;
+})
+var isProduction = process.env.NODE_ENV === 'production'
+var port = isProduction ? process.env.PORT : 3500
 var moment = require('moment')
 var asyncLoop = require('./csv_import').asyncLoop
 var validateNumber = require('./csv_import').validateNumber
 
 
 ///////////////////////////////////////// Models
-var User = require('./db/User.model');
-var Zipcode = require('./db/Zipcode.model');
-var CandidateSummary = require('./db/Candidate_Summary.model');
-var Contribution = require('./db/Contribution.model');
-var GE_Turnout = require('./db/Gen_Election_Voter_Turnout.model');
-var LDR_PAC_Sponsor = require('./db/LDR_PAC_Sponsor.model');
-var Administrative_Fine = require('./db/Administrative_Fine.model');
-var UserOpinion = require('./db/UserOpinion.model');
+var User = require('./db/User.model')
+var Zipcode = require('./db/Zipcode.model')
+var CandidateSummary = require('./db/Candidate_Summary.model')
+var Contribution = require('./db/Contribution.model')
+var GE_Turnout = require('./db/Gen_Election_Voter_Turnout.model')
+var LDR_PAC_Sponsor = require('./db/LDR_PAC_Sponsor.model')
+var Administrative_Fine = require('./db/Administrative_Fine.model')
+var UserOpinion = require('./db/UserOpinion.model')
 
 //////////////////////////////////////////
 
@@ -38,45 +38,45 @@ var UserOpinion = require('./db/UserOpinion.model');
 module.exports = function(app) {
   
   app.listen(port, function () {
-    console.log('Server running on port ' + port);
-  });
+    console.log('Server running on port ' + port)
+  })
   
-  app.post('/signin', requireSignin, Authentication.signin);
-  app.post('/signup', Authentication.signup);
+  app.post('/signin', requireSignin, Authentication.signin)
+  app.post('/signup', Authentication.signup)
 
   //route to return the representative for the district based on the zipcode lookup
   app.get('/api/representatives/:zipcode', function(req, res) {
-    var zipcode = req.params.zipcode;
-    var state;
+    var zipcode = req.params.zipcode
+    var state
     Zipcode.find({ zipcode: zipcode}).exec(function(err, doc){
-          state = doc[0].state;
-          var district = doc[0].district;
-      var url;
+      state = doc[0].state
+      var district = doc[0].district
+      var url
       if (doc[1]) {
         url = 'https://www.govtrack.us/api/v2/role?current=true&district=' + district + '&district=' + doc[1].district + '&state=' + state
       } else {
         url = 'https://www.govtrack.us/api/v2/role?current=true&district=' + district + '&state=' + state
       }
-    fetch(url)
+      fetch(url)
     .then(function(rep) {
-      return rep.json();
+      return rep.json()
     }).then(function(val) {
-      return val;
+      return val
     }).then(function(congressperson) {
       fetch('https://www.govtrack.us/api/v2/role?current=true&role_type=senator&state=' + state)
           .then(function(img) {
-            return img.json();
+            return img.json()
           })
           .then(function(senator) {
             for (var i = congressperson.objects.length - 1; i >= 0; i--) {
               senator.objects.push(congressperson.objects[i])
             }
-            res.send(senator);
-          });
-    });
+            res.send(senator)
+          })
+    })
 
-    });  
-  });
+    })  
+  })
   
   
   app.get('/api/zipcode/:lat/:long', function(req, res) {
@@ -96,20 +96,20 @@ module.exports = function(app) {
   app.get('/api/data/senate_bills', (req, res) => {
     senateBill.find({}, (err, doc) => {
       if (err) {
-        console.warn('error getting senate bills', err);
+        console.warn('error getting senate bills', err)
       }
-      res.send(doc);
-    });
-  });
+      res.send(doc)
+    })
+  })
 
   // house bills
   app.get('/api/data/house_bills', (req, res) => {
     congressBill.find({}, (error, bill) => {
       if (error) {
-        console.warn('error getting house bill', error);
+        console.warn('error getting house bill', error)
       }
-      res.send(bill);
-    });
+      res.send(bill)
+    })
   })
 
 
@@ -124,61 +124,61 @@ module.exports = function(app) {
     var data = CandidateSummary.find({})
     .exec( function(err, data){
       if (err) {
-        res.send('an error occured fetching your data :(');
+        res.send('an error occured fetching your data :(')
       } else {
-        res.json(data);
+        res.json(data)
       }
-    });
-  });
+    })
+  })
 
   //Retrieve a Candidate Summary based on zipcode and collectionYear
   app.get('/api/data/CandidateSummary/:zipcode/:collectionYear', function(req, res) {
 
-      req.params.zipcode = validateNumber(req.params.zipcode);
-      req.params.collectionYear = validateNumber(req.params.collectionYear);
+    req.params.zipcode = validateNumber(req.params.zipcode)
+    req.params.collectionYear = validateNumber(req.params.collectionYear)
       //@TODO: Update so 2016 is not hardcoded in
-      console.log('Number(req.params.collectionYear): ', Number(req.params.collectionYear))
-      if(Number(req.params.collectionYear) <= 2016 &&
+    console.log('Number(req.params.collectionYear): ', Number(req.params.collectionYear))
+    if(Number(req.params.collectionYear) <= 2016 &&
         Number(req.params.collectionYear) >= 2000 &&
         req.params.zipcode.length === 5
         ) {
 
-      var zipcode = req.params.zipcode;
-      var year = req.params.collectionYear;
+        var zipcode = req.params.zipcode
+        var year = req.params.collectionYear
 
 
       //@TODO: Update
-      Zipcode.find({ zipcode: zipcode }).exec(function(error, zipObject) {
-        if (error) { console.log('error retrieving zipcode', error); }
+        Zipcode.find({ zipcode: zipcode }).exec(function(error, zipObject) {
+        if (error) { console.log('error retrieving zipcode', error) }
 
         // var theYear = Date.parse('01/01/' + req.params.collectionYear);
 
         if (zipObject.length > 1) {
-          var storage = [];
-          var iterations = zipObject.length;
-          var i = 0;
+          var storage = []
+          var iterations = zipObject.length
+          var i = 0
           asyncLoop(iterations, function(loop) {
             //@TODO: recode candidate summary Query to not use hardcoded Date.parse() value
             CandidateSummary.find({ year_of_collection: year, can_off_sta: zipObject[i].state, can_off_dis: zipObject[i].district })
           .exec(function(err, docs) {
             if (err) {
-              console.log(loop.iteration(), 'Candidate was skipped.', err);
+              console.log(loop.iteration(), 'Candidate was skipped.', err)
               if (i < iterations) {
-                i++;
-                loop.next();
+                i++
+                loop.next()
               } else { 
-                loop.next(); 
+                loop.next() 
               }
             } else {
               if (i < iterations) {
-                i++;
-                console.log(loop.iteration(), 'Candidate has been sent');
-                storage.push(docs);  
-                loop.next();
+                i++
+                console.log(loop.iteration(), 'Candidate has been sent')
+                storage.push(docs)  
+                loop.next()
               }
             }
           })
-          }, function() { res.json(storage); });
+          }, function() { res.json(storage) })
         } else {
           if( zipObject[0] ){
             CandidateSummary.find({ year_of_collection: year, can_off_dis: zipObject[0].district, can_off_sta: zipObject[0].state})
@@ -197,9 +197,9 @@ module.exports = function(app) {
         }
       }) 
 
-    } else {
-      res.status(404).send('Invalid Year or Zipcode Entered')
-    }
+      } else {
+        res.status(404).send('Invalid Year or Zipcode Entered')
+      }
   })
   //if we're not in production, this proxies requests to localhost:3000 and sends them to our webpack server at localhost:8080
   if (!isProduction) {
@@ -218,9 +218,9 @@ module.exports = function(app) {
   //catch all other get requests, such as when refreshing
   app.get('*', function(req, res) {
     res.sendFile(publicPath + '/index.html')
-  });
+  })
 
-};
+}
 
 // cronjob runs every day at 9am Pacific Time
 

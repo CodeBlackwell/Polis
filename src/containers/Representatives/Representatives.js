@@ -5,7 +5,7 @@ import { getContributorData } from '../../actions/actionContributor'
 import RepresentativeList from '../../components/RepresentativeView/RepresentativeList'
 import Spinner from '../../components/Spinner/Spinner'
 
-import '../../components/RepresentativeView/RepView.scss';
+import '../../components/RepresentativeView/RepView.scss'
 
 
 class Representatives extends Component {
@@ -16,7 +16,7 @@ class Representatives extends Component {
   stopSpinner() {
     this.props.dispatch(stopProgress())
     setTimeout(()=>{
-      clearInterval(this.interval);
+      clearInterval(this.interval)
     }, 55000)
   }
 
@@ -52,7 +52,7 @@ class Representatives extends Component {
                             selectRep={this.selectRep} 
                             /> }        
       </div>
-    );
+    )
   }
 }
 

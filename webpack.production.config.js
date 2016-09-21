@@ -1,10 +1,10 @@
 "use strict"
 
-var webpack = require('webpack');
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var webpack = require('webpack')
+var path = require('path')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-var buildPath = path.resolve(__dirname, 'public', 'build');
+var buildPath = path.resolve(__dirname, 'public', 'build')
 var sassLoaders = [
   'sass-loader?indent edSyntax=sass&includePaths[]=' + path.resolve(__dirname, 'public', 'build'),
   'postcss-loader',

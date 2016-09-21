@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import './RegisterForm.scss';
+import './RegisterForm.scss'
 export default class RegisterForm extends Component {
-   handleSubmit(e) {
-      e.preventDefault();
-      this.props.onSubmit(this.login.value, this.password.value);
-      this.login.value = ''
-      this.password.value= ''
+  handleSubmit(e) {
+     e.preventDefault()
+     this.props.onSubmit(this.login.value, this.password.value)
+     this.login.value = ''
+     this.password.value= ''
    }
 
-   render () {
-      return (
+  render () {
+     return (
          <div className='register-container'>
             <h1 className='register-header'>Register</h1>
             <form action="#" onSubmit={(e) => this.handleSubmit(e)}>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { GET_HEAT_MAP, getHeatMapData } from '../../actions/actionHeatMap'
 
-import './HeatMap.scss';
+import './HeatMap.scss'
 
 
 var counties = {
@@ -85,13 +85,13 @@ class HeatMap extends Component {
     })
   }
   render() {
-    const rateById = d3.map();
+    const rateById = d3.map()
     const quantize = d3.scale.quantize()
       .domain([25, 50])
       .range(d3.range(9).map(function(i) { return 'q' + i + '-9'}))
 
-    const width = 960;
-    const height = 600;
+    const width = 960
+    const height = 600
      
     const projection = d3.geo.albers()
       .scale(3000)

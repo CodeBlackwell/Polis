@@ -1,15 +1,15 @@
-import nock                         from 'nock'
-import configureMockStore           from 'redux-mock-store'
-import thunk                        from 'redux-thunk'
-import { expect }                   from 'chai'
-import sinon                        from 'sinon'
-import React                        from 'React'
-import { mount, shallow, render }   from 'enzyme'
+import nock from 'nock'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import { expect } from 'chai'
+import sinon from 'sinon'
+import React from 'React'
+import { mount, shallow, render } from 'enzyme'
 
-import * as actions                 from '../src/actions/actionRepWords'
-import repWords                     from '../src/reducers/reducerRepWords'
-import { RepWords }                 from '../src/containers/Representatives/RepWords'
-import Chart                        from '../node_modules/d3act/lib/components/Chart'
+import * as actions from '../src/actions/actionRepWords'
+import repWords from '../src/reducers/reducerRepWords'
+import { RepWords } from '../src/containers/Representatives/RepWords'
+import Chart from '../node_modules/d3act/lib/components/Chart'
 
 
 const middlewares = [ thunk ]
@@ -117,11 +117,11 @@ describe('Rep Words Buttons', () => {
   function mockData() {
     return {hello: 'world'}
   }
-  const data      = mockData()
-  let dispatch    = sinon.spy()
-  let lessWords   = sinon.spy(RepWords.prototype, 'lessWords')
-  let moreWords   = sinon.spy(RepWords.prototype, 'moreWords')
-  let wrapper     = shallow(<RepWords data={data} dispatch={dispatch} />)
+  const data = mockData()
+  let dispatch = sinon.spy()
+  let lessWords = sinon.spy(RepWords.prototype, 'lessWords')
+  let moreWords = sinon.spy(RepWords.prototype, 'moreWords')
+  let wrapper = shallow(<RepWords data={data} dispatch={dispatch} />)
 
   afterEach(() => {
     lessWords.restore()
@@ -153,8 +153,8 @@ describe('Rep Words Component', () => {
   let random = Math.floor(Math.random() * 1000)
   function mockRepresentatives() {
     return [{person: {
-              id: random
-              }
+      id: random
+    }
             }]
   }
   function mockParams() {
@@ -163,12 +163,12 @@ describe('Rep Words Component', () => {
   function mockData() {
     return {hello: 'world'}
   }
-  const data            = mockData()
-  let dispatch          = sinon.spy()
+  const data = mockData()
+  let dispatch = sinon.spy()
   const representatives = mockRepresentatives()
-  const params          = mockParams()
+  const params = mockParams()
   sinon.spy(RepWords.prototype, 'componentDidMount')
-  let wrapper           = mount(<RepWords representatives={representatives} params={params} dispatch={dispatch} />)
+  let wrapper = mount(<RepWords representatives={representatives} params={params} dispatch={dispatch} />)
   
   it('calls componentDidMount on mount', () => {
     expect(RepWords.prototype.componentDidMount.calledOnce).to.equal(true)

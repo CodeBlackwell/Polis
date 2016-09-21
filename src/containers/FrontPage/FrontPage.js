@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import HeatMap from '../../components/HeatMap/HeatMap';
-import Tutorial from '../../components/Tutorial/Tutorial';
-import GettingStarted from '../../components/GettingStarted/GettingStarted';
-import TopNavBarbar from '../../components/TopNavBar/TopNavBar';
+import HeatMap from '../../components/HeatMap/HeatMap'
+import Tutorial from '../../components/Tutorial/Tutorial'
+import GettingStarted from '../../components/GettingStarted/GettingStarted'
+import TopNavBarbar from '../../components/TopNavBar/TopNavBar'
 
-import './FrontPage.scss';
+import './FrontPage.scss'
 
 
 export default class FrontPage extends Component {

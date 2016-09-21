@@ -31,9 +31,9 @@ export function getContributorData(zipcode) {
 
 export function receiveContributorData(data) {
   console.log('Line 33: this is in receiveContributorData ', data)
-	return {
-		type: GET_CONTRIBUTOR_DATA,
-		data
+	  return {
+		  type: GET_CONTRIBUTOR_DATA,
+		  data
 	}
 }
 

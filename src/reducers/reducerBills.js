@@ -10,40 +10,40 @@ export default function upcomingBills(state = {
   role: null
 }, action) {
   switch (action.type) {
-    case BILL_DATA:
-      return Object.assign({}, state, {
+  case BILL_DATA:
+    return Object.assign({}, state, {
         bills: state.bills.concat(action.payload)
       })
-    case SET_REP_ROLE:
-      return Object.assign({}, state, {
+  case SET_REP_ROLE:
+    return Object.assign({}, state, {
         role: action.payload
       })
-    case REP_VOTING_HISTORY:
-      return Object.assign({}, state, {
+  case REP_VOTING_HISTORY:
+    return Object.assign({}, state, {
         repVotes: action.payload
       })
-    case ADD_TO_BILLS:
-      return Object.assign({}, state, {
+  case ADD_TO_BILLS:
+    return Object.assign({}, state, {
         billsToShow: state.billsToShow += 10
       })
-    case YES_VOTE:
-      return Object.assign({}, state, {
+  case YES_VOTE:
+    return Object.assign({}, state, {
         yes: action.payload,
         no: null
       })
-    case NO_VOTE:
-      return Object.assign({}, state, {
+  case NO_VOTE:
+    return Object.assign({}, state, {
         no: action.payload,
         yes: null
       })
-    case LOGIN_CHECK:
-      return changeBillProps(state, action.payload)
-    case BILL_VOTE:
-      return changeBillProps(state, action.payload)
-    case USER_LOGIN_SUCCESS:
-      return changeLoginToTrue(state, state.bills, 'bills')
-    default:
-      return state
+  case LOGIN_CHECK:
+    return changeBillProps(state, action.payload)
+  case BILL_VOTE:
+    return changeBillProps(state, action.payload)
+  case USER_LOGIN_SUCCESS:
+    return changeLoginToTrue(state, state.bills, 'bills')
+  default:
+    return state
   }
 }
 

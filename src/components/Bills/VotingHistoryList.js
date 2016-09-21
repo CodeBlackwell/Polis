@@ -39,20 +39,20 @@ class VotingHistoryList extends Component {
   }
 
 
- render() {
-  const {repVotes, billsToShow, loginCheck} = this.props
-  return (
+  render() {
+   const {repVotes, billsToShow, loginCheck} = this.props
+   return (
     <div>
      {repVotes.map( (bill, i)=> {
-      while (i < billsToShow) {
+       while (i < billsToShow) {
         return <BillVotes bill={bill} 
                      handleLoginCheck={this.handleLoginCheck}
                      onYesChange={this.onYesChange}
                      onNoChange={this.onNoChange} 
                      loginCheck={loginCheck}
                      key={i}/>
-       }
-      }) 
+      }
+     }) 
       }
      <button type="button" className="btn btn-default show_more_bills" onClick={() => this.props.showMoreBills()}>More</button>
     </div> 

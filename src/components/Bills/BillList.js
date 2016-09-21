@@ -11,19 +11,19 @@ export default class BillList extends Component {
       <div>
        {bills.map( (bill, i)=> {
          if (role) {
-          if (bill[role]) {
+           if (bill[role]) {
             while (count < billsToShow) {
               count++
               return <Bill bill={bill} key={i}/>
             }
-           }
-        } else {
-           while (count < billsToShow) {
-                count++
-                return <Bill bill={bill} key={i}/>
           }
-        }
-        }) 
+         } else {
+           while (count < billsToShow) {
+             count++
+             return <Bill bill={bill} key={i}/>
+           }
+         }
+       }) 
         }
        <button type="button" className="btn btn-default show_more_bills" onClick={e => this.props.showMoreBills()}>More</button>
       </div> 

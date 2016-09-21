@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 
 export default class LoginForm extends Component {
-   handleSubmit(e) {
-      e.preventDefault();
-      this.props.onSubmit(this.login.value, this.password.value);
-      this.login.value = ''
-      this.password.value= ''
+  handleSubmit(e) {
+     e.preventDefault()
+     this.props.onSubmit(this.login.value, this.password.value)
+     this.login.value = ''
+     this.password.value= ''
    }
-   render () {
-      return (
+  render () {
+     return (
          <div>
             <h1 className='login-header'>Login</h1>
             <form className='login-form' action="#" onSubmit={(e) => this.handleSubmit(e)}>

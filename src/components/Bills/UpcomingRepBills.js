@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { getRoleBills, getSenateBillData, getHouseBillData, addToBills } from '../../actions/actionBills';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getRoleBills, getSenateBillData, getHouseBillData, addToBills } from '../../actions/actionBills'
 import BillList from './BillList'
 import Spinner from '../Spinner/Spinner'
 
 class UpcomingRepBills extends Component {
 
   showMoreBills() {
-    this.props.dispatch(addToBills());
+    this.props.dispatch(addToBills())
   }
 
   componentWillMount() {
@@ -20,7 +20,7 @@ class UpcomingRepBills extends Component {
   }
 
   render() {
-    const { bills, billsToShow, role } = this.props;
+    const { bills, billsToShow, role } = this.props
     return (
       <div>
         { bills.length && bills[0].sponsor ? <BillList bills={bills} billsToShow={billsToShow} showMoreBills={this.showMoreBills.bind(this)}/> : <div><Spinner /></div> }
@@ -43,4 +43,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(UpcomingRepBills);
+export default connect(mapStateToProps)(UpcomingRepBills)

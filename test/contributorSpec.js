@@ -1,17 +1,17 @@
-import React                        from 'react'
+import React from 'react'
 import {
   renderIntoDocument,
   findRenderedDOMComponentWithTag
-}                                   from 'react-addons-test-utils'
-import nock                         from 'nock'
-import configureMockStore           from 'redux-mock-store'
-import thunk                        from 'redux-thunk'
-import {expect}                     from 'chai'
+} from 'react-addons-test-utils'
+import nock from 'nock'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import {expect} from 'chai'
 import { GET_CONTRIBUTOR_DATA,
          SET_GRAPH_TYPE,
          setContributorData,
-         setGraphType }             from '../src/actions/actionContributor'
-import contributorData              from '../src/reducers/reducerContributor'
+         setGraphType } from '../src/actions/actionContributor'
+import contributorData from '../src/reducers/reducerContributor'
 
 
 xdescribe('Contributor Data Ecosystem', () => {
@@ -27,12 +27,12 @@ xdescribe('Contributor Data Ecosystem', () => {
     expect(
       contributorData(undefined, {})
       ).to.deep.equal(
-        {
+      {
         grouped: false,
         m: null,
         n: null,
         layers: null
-        }
+      }
       )
   })
 
@@ -43,7 +43,7 @@ xdescribe('Contributor Data Ecosystem', () => {
       })
     ).to.deep.equal({
       grouped: true
-      }
+    }
     )
   })
 
@@ -59,12 +59,12 @@ xdescribe('Contributor Data Ecosystem', () => {
     }
     expect(
       setContributorData().to.deep.equal({
-      data: {
+        data: {
         m: 4,
         n: 3,
         layers: 12
       },
-      type: GET_CONTRIBUTOR_DATA
+        type: GET_CONTRIBUTOR_DATA
       
       })
     )

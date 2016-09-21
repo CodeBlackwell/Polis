@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
 
 // Basic User
 var UpcomingCongressionalBillSchema = new Schema({
@@ -10,6 +10,6 @@ var UpcomingCongressionalBillSchema = new Schema({
   billDescription: String,
   sponsor: String
 
-});
+})
 
-module.exports = mongoose.model('UpcomingCongressionalBill', UpcomingCongressionalBillSchema);
+module.exports = mongoose.model('UpcomingCongressionalBill', UpcomingCongressionalBillSchema)

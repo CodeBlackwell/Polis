@@ -1,12 +1,12 @@
-var path = require('path');
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path')
+var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 var sassLoaders = [
-    'css-loader',
-    'postcss-loader',
-    'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve(__dirname, 'public', 'build')
-  ];
+  'css-loader',
+  'postcss-loader',
+  'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve(__dirname, 'public', 'build')
+]
 
 
 module.exports = {
@@ -46,15 +46,15 @@ module.exports = {
   },
 
   resolve: {
-        extensions: ['', '.js', '.jsx', '.css', '.scss', '.json'],
-        modulesDirectories: [
+    extensions: ['', '.js', '.jsx', '.css', '.scss', '.json'],
+    modulesDirectories: [
           'node_modules'
         ]        
-    },
+  },
   //Since we're running Webpack from our server, need to manually add the
   //Hot Replacement plugin
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('[name].css')
   ]
-};
+}

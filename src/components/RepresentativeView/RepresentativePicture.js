@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import './RepView.scss';
+import './RepView.scss'
 
 const RepresentativePicture = ({image}) => (
 		<div>

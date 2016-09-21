@@ -9,7 +9,7 @@ import { getContributorData } from '../../actions/actionContributor'
 import { getRepresentatives } from '../../actions/actionRepresentatives'
 import { loginSuccess } from '../../actions/actionLogin'
 
-import './App.scss';
+import './App.scss'
 
 class App extends Component {
 
@@ -25,7 +25,7 @@ class App extends Component {
         .then(location => {
           dispatch(getRepresentatives(location.results[0].address_components[0].short_name))
           dispatch(getContributorData(location.results[0].address_components[0].short_name))
-      })
+        })
     }.bind(this))
   }
   render() {

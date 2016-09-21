@@ -4,13 +4,13 @@ import { userLogin } from '../../actions/actionLogin'
 import LoginForm from '../../components/LoginForm/LoginForm'
 
 export class Login extends Component {
-   onSubmit(login, password) {
-      this.props.dispatch(userLogin(login, password))
+  onSubmit(login, password) {
+     this.props.dispatch(userLogin(login, password))
    }
 
-   render () {
-      const { processingLogin, isLoggedIn, loginError } = this.props
-      return <div>
+  render () {
+     const { processingLogin, isLoggedIn, loginError } = this.props
+     return <div>
          <div className='login-background'></div>
          <div className='tutorial-container'>
             <div className='login-container'>
@@ -24,13 +24,13 @@ export class Login extends Component {
 }
 
 function mapStateToProps(state) {
-   const isLoggedIn = state.user.isLoggedIn
-   const loginError = state.user.loginError
-   const processingLogin = state.user.processingLogin
-   return {
-      isLoggedIn,
-      loginError,
-      processingLogin
+  const isLoggedIn = state.user.isLoggedIn
+  const loginError = state.user.loginError
+  const processingLogin = state.user.processingLogin
+  return {
+     isLoggedIn,
+     loginError,
+     processingLogin
    }
 }
 

@@ -1,6 +1,6 @@
 export const RECEIVE_REP_WORDS = 'RECEIVE_REP_WORDS'
-export const MORE_REP_WORDS    = 'MORE_REP_WORDS'
-export const LESS_REP_WORDS    = 'LESS_REP_WORDS'
+export const MORE_REP_WORDS = 'MORE_REP_WORDS'
+export const LESS_REP_WORDS = 'LESS_REP_WORDS'
  
 
 export function getRepWords(rep, testing) {

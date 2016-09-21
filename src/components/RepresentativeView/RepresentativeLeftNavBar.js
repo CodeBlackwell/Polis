@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Link }from 'react-router'
 
-import './RepView.scss';
+import './RepView.scss'
 
 class RepresentativeLeftNavBar extends Component {
 
-	render() {
-		return (
+	  render() {
+		  return (
 			<div className="rep-left-navbar">
 				<Link to={{ pathname: 'representatives/' + this.props.id + '/voting_history'}} className="option">Voting History</Link><br />
 				<hr />

@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
 
 var stringOpts = { type: String, required: false, sparse: true },
     numOpts = { type: Number, required: false, sparse: true }
@@ -10,8 +10,8 @@ var Contribution = new Schema({
   spe_id:   stringOpts, // Spender Id
   spe_name: stringOpts,// Spender Name
   ele_type: stringOpts, // type of election the donation was made for
-can_off_sta: stringOpts, // State of Candidate
-can_off_district: numOpts, // Candidate District
+  can_off_sta: stringOpts, // State of Candidate
+  can_off_district: numOpts, // Candidate District
   can_off:   stringOpts, //Candidate office
   can_par_aff: stringOpts, //Party affiliation of Candidate
   exp_amo: numOpts, // $ amount of specific expenditure
@@ -27,7 +27,7 @@ can_off_district: numOpts, // Candidate District
   rec_dt:  stringOpts, // Filing Receipt date
   prev_file_num: numOpts, //previous filing number
   dissem_dt: stringOpts //Date of Public Dissemenation
-  });
+})
 
 
 
@@ -36,4 +36,4 @@ can_off_district: numOpts, // Candidate District
 // MongoDB adds an 's' to Model name to create the database name.
 // "Contributions" is the name of the entire Collection
 // "Contribution" is the name of the Model
-module.exports = mongoose.model('Contribution', Contribution);
+module.exports = mongoose.model('Contribution', Contribution)
