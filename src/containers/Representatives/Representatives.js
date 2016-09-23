@@ -20,13 +20,8 @@ class Representatives extends Component {
     }, 55000)
   }
 
-  tick() {
-    this.props.dispatch(increaseProgress())
-  }
-
   componentDidMount() {
     this.interval = setInterval(() => {
-      this.tick()
       if (this.props.isFetching) {
         this.props.dispatch({ type: 'INCREASE_PROGRESS' })
       } else {
