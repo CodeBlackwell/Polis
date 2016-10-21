@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 
 import Register from '../../containers/Register/Register'
+import ZipcodeContainer from '../../containers/ZipCode/ZipcodeContainer'
 
 import './Tutorial.scss'
 
@@ -19,6 +20,7 @@ export default class Tutorial extends Component {
           <p className="tutorial_text">Empowering voters to take ownership of their democratic system through education, and data.</p>
         </div>
         <div className='getting-started-container'>
+          <ZipcodeContainer />
           <Register />
         </div>
       </div>
